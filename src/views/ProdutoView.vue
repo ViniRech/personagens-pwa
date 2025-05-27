@@ -32,14 +32,13 @@
   <section class="secao-dados">
 
     <div class="secao-dados-menu">
-      {{ dado.imgs }}
-      <img :src="dado.imgs[2]">
       <img @click="visualizar" class="botao-voltar" src="../assets/img/down-arrow.png">
       <div><img src="../assets/img/shopping-cart.png" alt="Carrinho:"> {{ carrinho }}</div>
     </div>
 
     <section class="secao-dados-imagem">
-
+      <!-- {{ dado.imgs }}
+      <img :src="dado.imgs[2]"> -->
       <div><img v-for="(img, index) in dado.imgs" :key="index" :src="imageUrl(img)" @mouseover="mudarImagem(index)"></div>
     </section>
 
