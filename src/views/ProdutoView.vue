@@ -14,54 +14,46 @@
   });
 
   function visualizar() {
-    router.push(`/`) //template string
+    router.push(`/`)
   };
 
   const carrinho = ref(0)
-  // const addCarrinho = () => {
-  //   carrinho.value++
-  // }
+  const addCarrinho = () => {
+    carrinho.value++
+  }
   const posicaoImagem = ref(0);
-  // const mudarImagem = (i) => {
-  //   posicaoImagem.value = i
-  // }
-  // const imageUrl = (img) => new URL(`@/assets/img/${img}`, import.meta.url).href;
+  const mudarImagem = (i) => {
+    posicaoImagem.value = i
+  }
+  const imageUrl = (img) => new URL(`../assets/img/${img}`, import.meta.url).href;
 </script>
 
 <template>
   <section class="secao-dados">
 
     <div class="secao-dados-menu">
+      {{ dado.imgs }}
+      <img :src="dado.imgs[2]">
       <img @click="visualizar" class="botao-voltar" src="../assets/img/down-arrow.png">
       <div><img src="../assets/img/shopping-cart.png" alt="Carrinho:"> {{ carrinho }}</div>
     </div>
 
     <section class="secao-dados-imagem">
-      {{ dado.imgs[posicaoImagem] }}
-      <!-- <img :src="imageUrl(dado.imgs[posicaoImagem])"> -->
-      <!-- <div><img v-for="(img, index) in dado.imgs" :key="index" :src="imageUrl(img)" @mouseover="mudarImagem(index)"></div> -->
+
+      <div><img v-for="(img, index) in dado.imgs" :key="index" :src="imageUrl(img)" @mouseover="mudarImagem(index)"></div>
     </section>
 
-    <!-- <section class="secao-dados-informacao">
+    <section class="secao-dados-informacao">
 
-                      <h1>{{ dado.nome }}</h1>
+      <h1>{{ dado.nome }}</h1>
+      <p>R$ {{ dado.preco }}</p>
+      <p v-if="carrinho >= 30" style="color: crimson">Limite máximo de compra atingido</p>
 
-                      <p>R$ {{ dado.preco.toFixed(2).replace('.', ',') }}</p>
+      <button @click="addCarrinho" :class="['botao-carrinho', { 'botao-desativado' : carrinho >= 30 }]">Adicionar ao carrinho</button>
 
-                      <p v-if="carrinho >= 30" style="color: crimson;">Limite máximo de compra atingido</p>
+    </section>
 
-                      <button
-                          @click="addCarrinho"
-                          class="botao-carrinho"
-                          :class="{ botaoDesativado : carrinho >= 30 }"
-                          :disabled="carrinho >= 30"
-                      >
-                          Adicionar ao carrinho
-                      </button>
-
-                  </section>-->
-
-              </section>
+  </section>
 </template>
 
 <style scoped>
@@ -156,7 +148,7 @@
     background-color: #FBAF00;
   }
 
-  .botaoDesativado {
+  .botao-desativado {
     background-color: #342E37;
     color: #F0F3F5;
     cursor: not-allowed;
